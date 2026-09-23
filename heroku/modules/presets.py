@@ -30,6 +30,9 @@ NUM_ROWS = 2
 ROW_SIZE = 4
 
 PRESETS = {
+    "security": [
+        "https://www.0xvector.lol/modules/hikariatama/PMBL/source"
+    ],
     "fun": [
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/aniquotes.py",
         "https://github.com/amm1edev/ame_repo/raw/refs/heads/main/artai.py",

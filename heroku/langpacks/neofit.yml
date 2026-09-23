@@ -261,6 +261,7 @@ heroku_backup:
   name: HerokuBackup
 presets:
   name: "Presets"
+  _security_title: "🔐 Security"
   _fun_title: "🪩 /usr/games"
   _fun_desc: "Entertainment packages."
   _chat_title: "👥 Sysadmin Tools"

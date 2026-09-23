@@ -261,6 +261,7 @@ heroku_backup:
   name: HerokuBackup
 presets:
   name: "Pr35375"
+  _security_title: "🔒 S3cur17y m0d5"
   _fun_title: "🪩 3n73r741nm3n7 m0d5"
   _fun_desc: "Fun m0d5 — 4n1m4710n5, sp4m, 3n73r741nm3n7, 37c."
   _chat_title: "👥 Gr0up 4dm1n H3lp3rz"

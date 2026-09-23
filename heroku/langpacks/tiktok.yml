@@ -253,6 +253,7 @@ heroku_backup:
 
   name: HerokuBackup
 presets:
+  _security_title: "🔐 + Вайбики"
   _fun_title: "🪩 Модули для рофлов"
   _fun_desc: "Чисто покекать — анимации, спам, и прочий фан."
   _chat_title: "👥 Для админов"

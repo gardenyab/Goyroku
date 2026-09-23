@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://github.com/hikariatama/assets/raw/master/1326-command-window-line-flat.webp" height="80">
-  <h1>Heroku Userbot</h1>
+  <h1>Goyroku, Heroku-based Userbot</h1>
   <p>Advanced Telegram userbot with enhanced security and modern features</p>
   
   <p>
@@ -58,7 +58,6 @@
 
 ## 🚀 Installation
 
-### VPS/VDS
 > **Note for VPS/VDS Users:**  
 > Add `--root` for root users (to avoid entering force_insecure)
 <details> <summary><b>Ubuntu / Debian</b></summary>
@@ -102,11 +101,8 @@ python3 -m heroku
 ```
 </details>
 
-
-
-### Other
 <details>
-  <summary><b>WSL(Windows)</b></summary>
+  <summary><b>Windows (WSL)</b></summary>
 
   > **⚠️ WARNING: Can be unstable!**
 
@@ -134,7 +130,7 @@ python3 -m heroku
 </details>
 
 <details>
-  <summary><b>Phone(Userland)</b></summary>
+  <summary><b>Android (Userland)</b></summary>
   
   1. <b>Install UserLAnd from</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">the link</a>
   2. <b>Open it, choose Ubuntu —&gt; Minimal —&gt; Terminal</b>
@@ -147,33 +143,6 @@ python3 -m heroku
 
 5. <b>At the end of the installation, a link will appear, follow it and enter your account details to log in.</b>
 > **Voila! You have installed Heroku on UserLAnd.**
-</details>
-
-### Official hostings
-<details>
-<summary><b>🌘 HikkaHost</b></summary>
-  
-  1. Go to [@hikkahost_bot](https://t.me/hikkahost_bot)
-  2. Press "Install"
-  3. Choose "🪐 Heroku"
-  And continue installation.
-  > **After that, you will receive a link, open it and login in your account.**
-
-</details>
-
-
-
-## Additional Features
-
-<details>
-  <summary><b>🔒 Automatic Database Backuper</b></summary>
-  <img src="https://user-images.githubusercontent.com/36935426/202905566-964d2904-f3ce-4a14-8f05-0e7840e1b306.png" width="400">
-</details>
-
-<details>
-  <summary><b>👋 Welcome Installation Screens</b></summary>
-  <img src="https://user-images.githubusercontent.com/36935426/202905720-6319993b-697c-4b09-a194-209c110c79fd.png" width="300">
-  <img src="https://user-images.githubusercontent.com/36935426/202905746-2a511129-0208-4581-bb27-7539bd7b53c9.png" width="300">
 </details>
 
 ---
@@ -203,14 +172,14 @@ python3 -m heroku
 
 | Type | Link |
 |------|------|
-| **User Documentation** | [heroku-ub.xyz](https://heroku-ub.xyz/) |
-| **Developer Docs** | [dev.heroku-ub.xyz](https://dev.heroku-ub.xyz/) |
+| **User Documentation** | currently unavailable |
+| **Developer Docs** | currently unavailable |
 
 ---
 
 ## 💬 Support
 
-[![Telegram Support](https://img.shields.io/badge/Telegram-Support_Group-2594cb?logo=telegram)](https://t.me/heroku_talks)
+Soon
 
 ---
 
@@ -233,3 +202,4 @@ python3 -m heroku
 
 - [**Hikari**](https://gitlab.com/hikariatama) for Hikka (project foundation)
 - [**Lonami**](https://t.me/lonami) for Telethon (Heroku-TL backbone)
+- [**Codrago**](https://t.me/motherdie) and [**Zetgo**](https://t.me/zetgo) for Heroku (project foundation)

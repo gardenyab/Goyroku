@@ -261,6 +261,7 @@ heroku_backup:
   name: HerokuBackup
 presets:
   name: "Pwesets"
+  _security_title: "🔒 Secuwity"
   _fun_title: "🪩 Entewtainment moduwes"
   _fun_desc: "Fun moduwes — anyimations, spam, entewtainment, etc."
   _chat_title: "👥 Gwoup Administwation Hewpews"

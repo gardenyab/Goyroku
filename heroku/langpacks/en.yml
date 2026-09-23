@@ -295,6 +295,7 @@ heroku_backup:
   name: HerokuBackup
 presets:
   name: "Presets"
+  _security_title: "🔒 Security modules"
   _fun_title: "🪩 Entertainment modules"
   _fun_desc: "Fun modules — animations, spam, entertainment, etc."
   _chat_title: "👥 Group Administration Helpers"

@@ -261,6 +261,7 @@ heroku_backup:
   name: HerokuBackup
 presets:
   name: "Presets"
+  _security_title: "🔒 セキュリティモジュール"
   _fun_title: "🪩 エンターテイメントモジュール"
   _fun_desc: "楽しいモジュール — アニメーション、スパム、エンターテイメントなど"
   _chat_title: "👥 グループ管理ヘルパー"

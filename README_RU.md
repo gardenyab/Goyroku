@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://github.com/hikariatama/assets/raw/master/1326-command-window-line-flat.webp" height="80">
-  <h1>Heroku Userbot</h1>
+  <h1>Goyroku, Heroku-based Userbot</h1>
   <p>Продвинутый юзербот для Telegram с повышенной безопасностью и современными функциями</p>
 
   <p>
@@ -55,7 +55,6 @@
 ---
 ## 🚀 Установка
 
-### VPS/VDS
 > **Примечание для пользователей VPS/VDS:**  
 > Добавьте `--root` для пользователей root (чтобы избежать ввода force_insecure)
 
@@ -100,12 +99,8 @@ python3 -m pip install -r requirements.txt && \
 python3 -m heroku
 ```
 </details>
-
-
-
-### Другие
 <details>
-  <summary><b>WSL(Windows)</b></summary>
+  <summary><b>Windows (WSL)</b></summary>
 
   > **⚠️ ВНИМАНИЕ: Может быть нестабильно!**
 
@@ -133,7 +128,7 @@ clear && git clone https://github.com/coddrago/Heroku && cd Heroku && python3 -m
 </details>
 
 <details>
-  <summary><b>Phone(Userland)</b></summary>
+  <summary><b>Android (Userland)</b></summary>
   
  1. <b>Установите UserLAnd по</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">ссылке</a>
 2. <b>Откройте его, выберите Ubuntu —> Minimal —> Terminal</b>
@@ -144,34 +139,6 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3 git python3-p
 ```
 5. <b>В конце установки появится ссылка, перейдите по ней и введите данные своей учетной записи для входа.</b>
 > Вуаля! Вы установили Heroku на UserLAnd.
-</details>
-
-### Официальные хосты
-<details>
-<summary><b>🌘 HikkaHost</b></summary>
-  
- 1. Перейдите в [@hikkahost_bot](https://.me/hikkahost_bot)
-2. Нажмите "Установить"
-3. Выберите "🪐 Heroku"
-И продолжайте установку.
-
-> **После этого вы получите ссылку, откройте ее и войдите в свою учетную запись.**
-
-</details>
-
-
-
-## Дополнительные функции
-
-<details>
-  <summary><b>🔒 Автоматическое резервное копирование базы данных</b></summary>
-  <img src="https://user-images.githubusercontent.com/36935426/202905566-964d2904-f3ce-4a14-8f05-0e7840e1b306.png" width="400">
-</details>
-
-<details>
-  <summary><b>👋 Приветственные экраны установки</b></summary>
-  <img src="https://user-images.githubusercontent.com/36935426/202905720-6319993b-697c-4b09-a194-209c110c79fd.png" width="300">
-  <img src="https://user-images.githubusercontent.com/36935426/202905746-2a511129-0208-4581-bb27-7539bd7b53c9.png" width="300">
 </details>
 
 ---
@@ -201,14 +168,14 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3 git python3-p
 
 | Тип | Ссылка |
 |------|-------|
-| Пользовательская документация | [heroku-ub.xyz](https://heroku-ub.xyz/) |
-| Документация для разработчиков | [dev.heroku-ub.xyz](https://dev.heroku-ub.xyz/) |
+| Пользовательская документация | Скоро |
+| Документация для разработчиков | Скоро |
 
 ---
 
 ## 💬 Поддержка
 
-[![Поддержка Telegram](https://img.shields.io/badge/Telegram-Support_Group-2594cb?logo=telegram)](https://t.me/heroku_talks)
+Скоро
 
 ---
 
@@ -229,5 +196,6 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3 git python3-p
 
 ## 🙏 Благодарности
 
-- [Hikari](https://gitlab.com/hikariatama) за Hikka (основа проекта)
-- [Lonami](https://t.me/lonami) за Telethon (основа Heroku-TL)
+- [**Hikari**](https://gitlab.com/hikariatama) за Hikka (основа проекта)
+- [**Lonami**](https://t.me/lonami) за Telethon (основа Heroku-TL)
+- [**Codrago**](https://t.me/motherdie) и [**Zetgo**](https://t.me/zetgo) за Heroku (основа проекта)

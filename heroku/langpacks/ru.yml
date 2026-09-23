@@ -254,6 +254,7 @@ heroku_backup:
 
   name: HerokuBackup
 presets:
+  _security_title: "🔐 Модули безопасности"
   _fun_title: "🪩 Развлекательные модули"
   _fun_desc: "Забавные модули — анимации, спам, игры, и др."
   _chat_title: "👥 Модули администрирования чата"
