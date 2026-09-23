@@ -51,7 +51,7 @@ class HerokuInfoMod(loader.Module):
             ),
             loader.ConfigValue(
                 "banner_url",
-                "https://https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_info.png",
+                "https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_info.png",
                 lambda: self.strings["_cfg_banner"],
                 validator=loader.validators.RandomLink(),
             ),

@@ -115,7 +115,7 @@ class CoreMod(loader.Module):
                 f"{herokutl.__version__} #{herokutl.tl.alltlobjects.LAYER}",
             )
             + (branch_text),
-            file="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_cmd.png",
+            file="https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_userbot.png",
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
 
