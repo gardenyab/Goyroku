@@ -1016,7 +1016,7 @@ class Heroku:
             if not self.omit_log:
                 print(logo)
                 logging.debug(
-                    "\n🪐 Heroku %s #%s (%s) started",
+                    "\n🪐 Goyroku %s #%s (%s) started",
                     ".".join(list(map(str, list(__version__)))),
                     build[:7],
                     upd,
@@ -1044,7 +1044,7 @@ class Heroku:
                         (
                             utils.get_platform_emoji()
                             if client.heroku_me.premium is True
-                            else "🪐 Heroku"
+                            else "🪐 Goyroku"
                         ),
                         ".".join(list(map(str, list(__version__)))),
                         build,

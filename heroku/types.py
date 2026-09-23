@@ -503,7 +503,7 @@ class Module:
             if version.__version__ < ver:
                 _raise(
                     RuntimeError(
-                        f"Library requires Heroku version {'{}.{}.{}'.format(*ver)}+"
+                        f"Library requires Goyroku version {'{}.{}.{}'.format(*ver)}+"
                     )
                 )
 

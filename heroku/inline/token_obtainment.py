@@ -69,7 +69,7 @@ class TokenObtainment(InlineUnit):
                 username = f"@{genran}_{uid}_bot"
 
             for msg in [
-                "🪐 Heroku userbot"[:64],
+                "🪐 Goyroku userbot"[:64],
                 username,
                 "/setuserpic",
                 username,
@@ -91,11 +91,11 @@ class TokenObtainment(InlineUnit):
 
                 if "DOCKER" in os.environ:
                     m = await conv.send_file(
-                        "https://raw.githubusercontent.com/coddrago/Heroku/refs/heads/master/assets/heroku-ava.png"
+                        "https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_ava.png"
                     )
                 else:
                     m = await conv.send_file(
-                        main.BASE_PATH / "assets" / "heroku-ava.png"
+                        main.BASE_PATH / "assets" / "goyroku_ava.png"
                     )
                 r = await conv.get_response()
 
