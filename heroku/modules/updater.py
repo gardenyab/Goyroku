@@ -270,7 +270,7 @@ class UpdaterMod(loader.Module):
             if manual_update:
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
-                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/updated.png",
+                    "https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_updated.png",
                     caption=self.strings["update_required"].format(
                         current[:6],
                         '<a href="https://github.com/gardenyab/Goyroku/compare/{}...{}">{}</a>'.format(
@@ -293,7 +293,7 @@ class UpdaterMod(loader.Module):
             else:
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
-                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/updated.png",
+                    "https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_updated.png",
                     caption=self.strings["autoupdate_notifier"].format(
                         self._pending[:6],
                         changelog,
@@ -692,7 +692,7 @@ class UpdaterMod(loader.Module):
         if not self.config["autoupdate"] and not self.get("autoupdate_answered", False):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
+                photo="https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_backup.png",
                 caption=self.strings["autoupdate"],
                 reply_markup=self.inline.generate_markup(
                     [

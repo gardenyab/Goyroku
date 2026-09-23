@@ -158,7 +158,7 @@ class Database(dict):
                 description="🪐 Content related to Heroku will be here",
                 silent=True,
                 invite_bot=True,
-                avatar="https://raw.githubusercontent.com/coddrago/assets/main/heroku/heroku.png",
+                avatar="https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_ava.png",
                 forum=True,
                 hide_general=True,
                 _folder="heroku",
