@@ -569,7 +569,6 @@ class UpdaterMod(loader.Module):
 
             if security_checks:
                 diff = utils.get_added_lines_by_file(as_string=True)
-                print(diff)
                 if diff:
                     results = await utils.check_m(diff)
                     if results["unsafe"] or results["unsafe_warn"]:

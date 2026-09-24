@@ -36,6 +36,13 @@ class HerokuInfoMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "custom_message",
+                """<tg-emoji emoji-id=5192939748074731570>🎭</tg-emoji> <b>Goyroku {version}, {branch}</b>
+
+<blockquote><tg-emoji emoji-id=5192864869614893119>🏎</tg-emoji> {me}
+————
+<tg-emoji emoji-id=5204072642608381541>🧩</tg-emoji> {upd}
+————
+<tg-emoji emoji-id=5190648194043755386>🚀</tg-emoji> {uptime}</blockquote>""",
                 doc=lambda: (
                     self.strings["_cfg_cst_msg"]
                     + "\n"
@@ -140,6 +147,7 @@ class HerokuInfoMod(loader.Module):
             "platform": platform,
             "platform_emoji": platform_emoji,
             "upd": upd,
+            "update": upd,
             "python_ver": lib_platform.python_version(),
             "uptime": utils.formatted_uptime(),
             "cpu_usage": utils.get_cpu_usage(),
