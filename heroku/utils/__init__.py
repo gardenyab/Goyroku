@@ -69,8 +69,10 @@ async def check_m(args):
         "council": {}
     }
 
+    crts = getBlockedStr()
+
     for category in results.keys():
-        for command in getBlockedStr.get(category, []):
+        for command in crts.get(category, []):
             if re.search(command["command"], string) is not None:
                 results[category][command["command"]] = command["perms"]
 

@@ -625,7 +625,8 @@ class UpdaterMod(loader.Module):
                 )
             ):
                 raise
-        except Exception:
+        except Exception as e:
+            print(e)
             await self.inline_update(message)
 
     @loader.command()
