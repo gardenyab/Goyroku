@@ -18,6 +18,7 @@ import os
 import shutil
 import subprocess
 import sys
+import re
 from pathlib import Path
 
 from ._internal import restart
@@ -156,7 +157,12 @@ else:
         try:
             import herokutl  # noqa: F811
 
-            if tuple(map(int, herokutl.__version__.split("."))) < (1, 7, 2):
+            ver_ = tuple(
+                int(match.group()) if (match := re.match(r"\d+", part)) else 0
+                for part in herokutl.__version__.split(".")
+                )
+
+            if ver_ < (1, 7, 2):
                 raise ImportError
         except ImportError:
             print("\U0001f504 Installing dependencies...")
