@@ -542,6 +542,12 @@ updater:
   _cmd_doc_autoupdate: Toggle automatic updates
   _cmd_doc_changelog: Show changelog of the last major update
   _cmd_doc_ubstop: Stop your userbot
+  unsafe_update: |
+    <tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> This update contains unsafe changes and we recommend not installing it. If you really want to do so, add <code>-s</code> to the command.
+
+    <blockquote>Detections:
+    {critical}
+    {warns}</blockquote>
 api_protection:
   name: "APILimiter"
   warning: "⚠️ <b>WARNING!</b>\n\nYour account exceeded the limit of requests, specified in config. In order to prevent Telegram API Flood, userbot has been <b>fully frozen</b> for {} seconds. Further info is provided in attached file. \n\nIt is recommended to get help in <code>{prefix}support</code> group!\n\nIf you think, that it is an intended behavior, then wait until userbot gets unlocked and next time, when you will be going to perform such an operation, use <code>{prefix}suspend_api_protect</code> &lt;time in seconds&gt;"
@@ -696,6 +702,13 @@ loader:
   _cmd_doc_ml: <module> - Send module as a file
   result: "<tg-emoji emoji-id=5337183664630709422>🔎</tg-emoji> <b>Search result for</b> <code>{query}</code>\n\n<tg-emoji emoji-id=5258270535710317499>📦</tg-emoji> <b>{name}</b> by <b>{dev}</b>\n<tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> <i>{cls_doc}</i>\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <b>Commands:</b>\n{commands}\n\n<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji> <code>{prefix}dlmod {mhash}</code>"
   verify_required: '<tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>To unlock the ability to install third-party modules, complete the test in <a href="https://t.me/{}?start=lm_verify">your bot</a></b>'
+  unsafe_module: |
+    <tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> This module is unsafe and we recommend not installing it. If you really want to do so, add <code>-f</code> to the command.
+
+    <blockquote>Detections:
+    {critical}
+    {warns}</blockquote>
+
 loader_restrictor:
   name: "LoaderRestrictor"
   q1: "What can any module you install actually do?"

@@ -134,3 +134,34 @@ def is_up_to_date():
     with git.Repo(search_parent_directories=True) as repo:
         diff = any(repo.iter_commits(f"HEAD..origin/{version.branch}", max_count=1))
         return not diff
+
+def get_added_lines_by_file(commit_ref="HEAD", as_string: bool = False):
+    added_by_file = {}
+
+    with git.Repo(search_parent_directories=True) as repo:
+        commit = repo.commit(commit_ref)
+        parent = commit.parents[0] if commit.parents else None
+
+        for diff in commit.diff(parent, create_patch=True):
+            if diff.diff is None:
+                continue
+
+            file_path = diff.b_path or diff.a_path
+            patch_text = diff.diff.decode("utf-8", errors="replace")
+
+            file_added_lines = [
+                line[1:]
+                for line in patch_text.splitlines()
+                if line.startswith("+") and not line.startswith("+++")
+            ]
+
+            if file_added_lines:
+                added_by_file[file_path] = file_added_lines
+
+    if as_string:
+        all_lines = []
+        for lines in added_by_file.values():
+            all_lines.extend(lines)
+        return "\n".join(all_lines)
+
+    return added_by_file
