@@ -60,7 +60,7 @@ class Help(loader.Module):
             ),
             loader.ConfigValue(
                 "banner_url",
-                None,
+                "https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_help.png",
                 lambda: "Banner for .help",
                 validator=loader.validators.RandomLink(),
             ),

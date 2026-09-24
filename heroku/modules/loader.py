@@ -565,7 +565,7 @@ class LoaderMod(loader.Module):
                 "💫 <b>Joined <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/joined_jr.png",
+            photo="https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_aprjn.png",
         )
 
     async def install_requirements(self, requirements: list):
