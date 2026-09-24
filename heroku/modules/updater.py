@@ -572,7 +572,7 @@ class UpdaterMod(loader.Module):
                 if diff:
                     results = await utils.check_m(diff)
                     if results["unsafe"] or results["unsafe_warn"]:
-                        await self.inline.form(
+                        await utils.answer(
                             message=message,
                             text=self.strings["unsafe_update"].format(
                                 critical="\n".join(
