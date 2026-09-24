@@ -172,36 +172,27 @@ class LoaderMod(loader.Module):
             ),
         )
 
-    """async def check_m(self, args):
+    async def check_m(self, args):
         string = args
-        critical = {}
-        warn = {}
-        council = {}
-        for command in self.checker_regex["critical"]:
-            r = re.search(command["command"], string)
-            if r is not None:
-                critical[command["command"]] = command["perms"]
-    
-        if not critical:
-            critical = {}
+        results = {
+            "critical": {},
+            "warn": {},
+            "council": {}
+        }
 
-        for command in self.checker_regex["warn"]:
-            r = re.search(command["command"], string)
-            if r is not None:
-                warn[command["command"]] = command["perms"]
+        for category in results.keys():
+            for command in self.checker_regex.get(category, []):
+                if re.search(command["command"], string) is not None:
+                    results[category][command["command"]] = command["perms"]
 
-        if not warn:
-            warn = {}
-    
-        for command in self.checker_regex["council"]:
-            r = re.search(command["command"], string)
-            if r is not None:
-                council[command["command"]] = command["perms"]
-
-        if not council:
-            council = {}
-    
-        return {"critical": critical, "warn": warn, "council": council, "args": args, "unsafe": bool(critical), "unsafe_warn": bool(warn)}"""
+        return {
+            "critical": results["critical"],
+            "warn": results["warn"],
+            "council": results["council"],
+            "args": args,
+            "unsafe": bool(results["critical"]),
+            "unsafe_warn": bool(results["warn"])
+        }
     
 
     async def _async_init(self):
@@ -580,6 +571,9 @@ class LoaderMod(loader.Module):
 
     @loader.command(alias="lm")
     async def loadmod(self, message: Message):
+        """
+        lm <-f>  - '-f' to skip the check for unsafe commands
+        """
         if await self._check_pass(message):
             return
 
@@ -600,6 +594,31 @@ class LoaderMod(loader.Module):
             await utils.answer(message, self.strings["bad_unicode"])
             return
 
+        args = message.text
+        if "-f" not in args:
+            results = await self.check_m(doc)
+            if results["unsafe"] or results["unsafe_warn"]:
+                await utils.answer(
+                    message,
+                    self.strings["unsafe_module"].format(
+                        "\n".join(
+                            [
+                                f"<code>{cmd}</code> - <b>{perm}</b>"
+                                for cmd, perm in results["critical"].items()
+                            ]
+                        )
+                        or self.strings["no_critical"],
+                        "\n".join(
+                            [
+                                f"<code>{cmd}</code> - <b>{perm}</b>"
+                                for cmd, perm in results["warn"].items()
+                            ]
+                        )
+                        or self.strings["no_warn"],
+                    ),
+                )
+                return
+        
         if path_ is not None:
             await self.load_module(doc, message, origin=path_, save_fs=True)
         else:

@@ -30,23 +30,17 @@ PACKS = Path(__file__).parent / "langpacks"
 SUPPORTED_LANGUAGES = {
     "en": "🇬🇧 English",
     "ru": "🇷🇺 Русский",
-    "uk": "🇺🇦 Український",
-    "de": "🇩🇪 Deutsch",
-    "ja": "🇯🇵 日本語",
+    "ja": "🇯🇵 日本語"
 }
 LANGUAGE_ALIASES = {
-    "ua": "uk",
-    "jp": "ja",
+    "jp": "ja"
 }
 LANGUAGE_COMPAT_ALIASES = {
-    "uk": ("ua",),
-    "ja": ("jp",),
+    "ja": ("jp",)
 }
 MEME_LANGUAGES = {
     "leet": "🏴‍☠️ 1337",
-    "uwu": "🏴‍☠️ UwU",
-    "tiktok": "🏴‍☠️ TikTokKid",
-    "neofit": "🏴‍☠️ Neofit",
+    "uwu": "🏴‍☠️ UwU"
 }
 
 
