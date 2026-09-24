@@ -8,4 +8,4 @@ if "." not in sys.path:
 
 runpy.run_module("heroku", run_name="__main__")
 
-""" THIS is only test : CustomTelegramClient ok ok"""
+""" THIS is only test : CustomTelegramClient ok o   k"""

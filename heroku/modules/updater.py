@@ -575,7 +575,7 @@ class UpdaterMod(loader.Module):
                     if results["unsafe"] or results["unsafe_warn"]:
                         await utils.answer(
                             message=message,
-                            text=self.strings["unsafe_update"].format(
+                            response=self.strings["unsafe_update"].format(
                                 critical="\n".join(
                                     [
                                         f"<code>{cmd}</code> - <b>{perm}</b>"
