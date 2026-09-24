@@ -172,6 +172,7 @@ config.json
 .profile.d/
 vendor/
 Pipfile.lock
+dev/
 
 heroku.log.*
 unknown_errors.txt
