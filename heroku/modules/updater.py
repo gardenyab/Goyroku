@@ -304,7 +304,7 @@ class UpdaterMod(loader.Module):
                         ),
                     ),
                 )
-                await self.invoke("update", "-f", peer=self.inline.bot_username)
+                await self.invoke("update", "-f", "-s", peer=self.inline.bot_username)
 
     async def _delete_all_upd_messages(self):
         for client in self.allclients:
@@ -554,7 +554,7 @@ class UpdaterMod(loader.Module):
 
     @loader.command()
     async def update(self, message: Message):
-        """update <-f> <-s> - `-f` force update, `-s` disable security check"""
+        """update <-f> <-s> - `-f` force update, `-s` for security check"""
         if NO_GIT:
             await utils.answer(
                 message,
@@ -565,10 +565,11 @@ class UpdaterMod(loader.Module):
             args = utils.get_args_raw(message)
             current = utils.get_git_hash() or ""
 
-            security_checks = "-s" not in args
+            security_checks = "-s" in args
 
             if security_checks:
                 diff = utils.get_added_lines_by_file(as_string=True)
+                print(diff)
                 if diff:
                     results = await utils.check_m(diff)
                     if results["unsafe"] or results["unsafe_warn"]:
