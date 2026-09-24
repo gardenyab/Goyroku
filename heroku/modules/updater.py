@@ -554,7 +554,7 @@ class UpdaterMod(loader.Module):
 
     @loader.command()
     async def update(self, message: Message):
-        """update <-f> <-s> - `-f` force update, `-s` disable security checks"""
+        """update <-f> <-s> - `-f` force update, `-s` disable security check"""
         if NO_GIT:
             await utils.answer(
                 message,
@@ -564,6 +564,7 @@ class UpdaterMod(loader.Module):
         try:
             args = utils.get_args_raw(message)
             current = utils.get_git_hash() or ""
+
             security_checks = "-s" not in args
 
             if security_checks:
@@ -571,9 +572,9 @@ class UpdaterMod(loader.Module):
                 if diff:
                     results = await utils.check_m(diff)
                     if results["unsafe"] or results["unsafe_warn"]:
-                        await utils.answer(
-                            message,
-                            self.strings["unsafe_update"].format(
+                        await self.inline.form(
+                            message=message,
+                            text=self.strings["unsafe_update"].format(
                                 critical="\n".join(
                                     [
                                         f"<code>{cmd}</code> - <b>{perm}</b>"
@@ -596,39 +597,32 @@ class UpdaterMod(loader.Module):
                 upcoming = next(
                     repo.iter_commits(f"origin/{version.branch}", max_count=1)
                 ).hexsha
-            force_update = "-f" in args
-            inline_ready = getattr(self.inline, "init_complete", False)
-
-            if not force_update and inline_ready:
-                if upcoming != current:
-                    text = self.strings["update_confirm"].format(
-                        current, current[:8], upcoming, upcoming[:8]
-                    )
-                else:
-                    text = self.strings["no_update"]
-
-                buttons = [
-                    {
-                        "text": self.strings["btn_update"],
-                        "callback": self.inline_update,
-                        "style": "primary",
-                    },
-                    {
-                        "text": self.strings["cancel"],
-                        "action": "close",
-                        "style": "danger",
-                    },
-                ]
-
-                form_success = await self.inline.form(
+            if (
+                "-f" in args
+                or not self.inline.init_complete
+                or not await self.inline.form(
                     message=message,
-                    text=text,
-                    reply_markup=buttons,
+                    text=(
+                        self.strings["update_confirm"].format(
+                            current, current[:8], upcoming, upcoming[:8]
+                        )
+                        if upcoming != current
+                        else self.strings["no_update"]
+                    ),
+                    reply_markup=[
+                        {
+                            "text": self.strings["btn_update"],
+                            "callback": self.inline_update,
+                            "style": "primary",
+                        },
+                        {
+                            "text": self.strings["cancel"],
+                            "action": "close",
+                            "style": "danger",
+                        },
+                    ],
                 )
-            else:
-                form_success = False
-
-            if force_update or not inline_ready or not form_success:
+            ):
                 raise
         except Exception:
             await self.inline_update(message)
