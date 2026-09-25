@@ -350,9 +350,10 @@ class UpdaterMod(loader.Module):
                                     ]
                                 )
                             )
+                            self.set("ignore_permanent", self.get_latest())
                             return
             
-                await self.invoke("update", "-f -s", peer=self.inline.bot_username) # DeleteAccountRequest
+                await self.invoke("update", "-f -s", peer=self.inline.bot_username)
 
     async def _delete_all_upd_messages(self):
         for client in self.allclients:
@@ -613,7 +614,7 @@ class UpdaterMod(loader.Module):
             args = utils.get_args_raw(message)
             current = utils.get_git_hash() or ""
 
-            security_checks = "-s" in args
+            security_checks = ("-s" not in args and self.config["update_security_checks"]) or ("-s" in args)
 
             if security_checks:
                 diff = utils.get_added_lines_by_file(as_string=True)

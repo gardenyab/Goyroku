@@ -547,7 +547,8 @@ updater:
   _cmd_doc_source: "Показать ссылку на исходный код проекта"
   _cmd_doc_update: "Скачивает обновления юзербота"
   _cmd_doc_rollback: "Откатывает обновления юзербота"
-
+  _cfg_doc_autoupdate_security_checks: "Использовать ли проверку на безопасность при автообновлении"
+  _cfg_doc_update_security_checks: "Использовать ли проверку на безопасность при обновлении"
   name: Updater
   _cmd_doc_autoupdate: Переключить автообновления
   _cmd_doc_changelog: Показать changelog последнего крупного обновления
@@ -558,6 +559,13 @@ updater:
     <blockquote>Detections:
     {critical}
     {warns}</blockquote>
+  unsafe_autoupdate: |
+    <tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> Это обновление содержит небезопасные изменения, и мы рекомендуем не устанавливать его. Если вы действительно хотите это сделать, напишите <code>{prefix}update -f</code> или нажмите на кнопку ниже.
+
+    <blockquote>Detections:
+    {critical}
+    {warns}</blockquote>
+  force_update: "🔄 Все равно обновить"
 
 heroku_plugin_security:
   name: "HikkaPluginSecurity"
