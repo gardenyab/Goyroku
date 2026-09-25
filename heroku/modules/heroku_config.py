@@ -64,7 +64,94 @@ class _InlineFormDraft:
 class HerokuConfigMod(loader.Module):
     """Interactive configurator for Heroku Userbot"""
 
-    strings = {"name": "HerokuConfig"}
+    strings = {
+        "Name": "HerokuConfig",
+        "choose_core": "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose a category</b>",
+        "configure": "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose a module to configure</b>",
+        "configure_lib": "📦 <b>Choose a library to configure</b>",
+        "configuring_mod": """<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose config option for mod</b> <code>{}</code>
+
+<b>Current options:</b>
+{}""",
+        "configuring_lib": """<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose config option for library</b> <code>{}</code>
+
+<b>Current options:</b>
+{}""",
+        "configuring_folder": """<tg-emoji emoji-id=5433653135799228968>📁</tg-emoji> <b>Choose config option for folder</b> <code>{}</code>
+
+<b>Current options:</b>
+{}""",
+        "configuring_category": """<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose config option for mod</b> <code>{}</code> <b>in category</b> <code>{}</code>
+<i>ℹ️ {}</i>
+
+<b>Current options:</b>
+{}""",
+        "configuring_category_lib": """<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose config option for library</b> <code>{}</code> <b>in category</b> <code>{}</code>
+<i>ℹ️ {}</i>
+
+<b>Current options:</b>
+{}""",
+        "category_header": """
+<b>📂 {}</b>""",
+        "category_header_doc": """
+<b>📂 {}</b>
+<i>{}</i>""",
+        "category_uncategorized": """
+<b><tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> Other</b>""",
+        "configuring_option": """<tg-emoji emoji-id=5404397691184643955>✍️</tg-emoji> <b>Configuring option</b> <code>{}</code> <b>of mod</b> <code>{}</code>
+<blockquote><tg-emoji emoji-id=5879785854284599288>ℹ️</tg-emoji> <i>{}</i></blockquote>
+
+<b>Default:</b>
+<blockquote><code>{}</code></blockquote>
+<b>Current:</b>
+<blockquote><code>{}</code></blockquote>
+
+{}
+""",
+        "configuring_option_lib": """<tg-emoji emoji-id=5256094480498436162>📦</tg-emoji <b>Configuring option</b> <code>{}</code> <b>of library</b> <code>{}</code>
+<blockquote><tg-emoji emoji-id=5879785854284599288>ℹ️</tg-emoji> <i>{}</i></blockquote>
+
+<b>Default:</b>
+<blockquote><code>{}</code></blockquote>
+<b>Current:</b>
+<blockquote><code>{}</code></blockquote>
+
+{}
+""",
+        "option_saved": """<tg-emoji emoji-id=5318933532825888187>⚙️</tg-emoji> <b>Option</b> <code>{}</code> <b>of module</b> <code>{}</code><b> saved!</b>
+<b>Current: {}</b>""",
+        "option_saved_lib": """<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>Option</b> <code>{}</code> <b>of library</b> <code>{}</code><b> saved!</b>
+<b>Current: {}</b>""",
+        "option_reset": """♻️ <b>Option</b> <code>{}</code> <b>of module</b> <code>{}</code> <b>has been reset to default</b>
+<b>Current: {}</b>""",
+        "option_reset_lib": """♻️ <b>Option</b> <code>{}</code> <b>of library</b> <code>{}</code> <b>has been reset to default</b>
+<b>Current: {}</b>""",
+        "args": "🚫 <b>You specified incorrect args</b>",
+        "no_mod": "🚫 <b>Module doesn't exist</b>",
+        "no_option": "🚫 <b>Configuration option doesn't exist</b>",
+        "validation_error": """🚫 <b>You entered incorrect config value.
+Error: {}</b>""",
+        "try_again": "🔁 Try again",
+        "typehint": "🕵️ <b>Must be a {eng_art} {}</b>",
+        "set": "set",
+        "set_default_btn": "♻️ Reset default",
+        "enter_value_btn": "✍️ Enter value",
+        "enter_value_desc": "✍️ Enter new configuration value for this option",
+        "add_item_desc": "✍️ Enter item to add",
+        "remove_item_desc": "✍️ Enter item to remove",
+        "back_btn": "👈 Back",
+        "close_btn": "🔻 Close",
+        "add_item_btn": "➕ Add item",
+        "remove_item_btn": "➖ Remove item",
+        "show_hidden": "🚸 Show value",
+        "hide_value": "🔒 Hide value",
+        "builtin": "🛰 Built-in",
+        "external": "🛸 External",
+        "libraries": "📦 Libraries",
+        "_cmd_doc_config": "Configure modules",
+        "_cmd_doc_fconfig": "<module_name> <property_name> <config_value> - set the config value for the module",
+        "_cls_doc": "Interactive configurator for Goyroku Userbot",
+    }
 
     def __init__(self):
         self.config = loader.ModuleConfig(
