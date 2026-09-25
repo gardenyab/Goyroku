@@ -221,8 +221,13 @@ heroku_web:
   name: GoyrokuAccounts
   _cls_doc: Управление аккаунтами через inline
   _cmd_doc_addacc: '[user/id/reply] - Добавить другой аккаунт через inline-вход'
+
 heroku_backup:
-  period: "⌚️ <b>Юнит «ALPHA»</b> создает регулярные резервные копии. Эти настройки можно изменить позже.\n\nПожалуйста, выберите периодичность резервного копирования\n\n<b>🚫 Таким образом невозможно восстановить модули скачанные с файлов командой .lm! Будьте осторожны и делайте .backupmods перед восстановлением.</b>"
+  period: |
+    <tg-emoji emoji-id=5213002459437342368>💾</tg-emoji> <b>GoyrokuBackup создает бекапы, чтобы вы могли сохраниться все модули* и данные, даже после переустановки</b>.
+    <blockquote>Выберите период сохранений</blockquote>
+
+    * Сохраняются только те модули, которые были загружены через ссылку
   saved: "✅ Периодичность сохранена! Ее можно изменить с помощью <code>{prefix}set_backup_period</code>"
   saved_bot: "✅ Периодичность сохранена! Ее можно изменить с помощью {prefix}set_backup_period"
   never: "✅ Я не буду делать автоматические резервные копии. Можно отменить используя <code>{prefix}set_backup_period</code>"
@@ -251,8 +256,15 @@ heroku_backup:
   _cmd_doc_set_backup_period: "<время в часах> - Установить частоту бэкапов"
   _cmd_doc_backupall: "Создаёт общую резервную копию (модули + база)"
   _cmd_doc_restoreall: "Восстанавливает общую резервную копию (база + модули)"
-
   name: GoyrokuBackup
+  never_button: "🚫 Не делать бэкапы"
+  restore_this_button: "🔄 Восстановить этот бэкап"
+  are_you_sure: |
+    <tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> <b>Вы уверены, что хотите восстановить этот бэкап?</b>
+    <blockquote>Все ваши текущие данные будут потеряны!</blockquote>
+  yes_restore: "✅ Да, восстановить"
+  backup_topic_not_found: "<tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> <b>Топик резервных копий не найден в базе данных. Пожалуйста, запустите quickstart для создания.</b>"
+
 presets:
   _security_title: "🔐 Модули безопасности"
   _fun_title: "🪩 Развлекательные модули"
@@ -364,20 +376,58 @@ heroku_config:
   choose_core: "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Выбери категорию</b>"
   configure: "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Выбери модуль для настройки</b>"
   configure_lib: "📦 <b>Выбери библиотеку для настройки</b>"
-  configuring_mod: "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Выбери параметр для модуля</b> <code>{}</code>\n\n<b>Текущие настройки:</b>\n\n{}"
-  configuring_lib: "📦 <b>Выбери параметр для библиотеки</b> <code>{}</code>\n\n<b>Текущие настройки:</b>\n\n{}"
-  configuring_folder: "<tg-emoji emoji-id=5433653135799228968>📁</tg-emoji> <b>Выбери параметр для папки</b> <code>{}</code>\n\n<b>Текущие настройки:</b>\n\n{}"
+  configuring_mod: |
+    <tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Выбери параметр для модуля</b> <code>{}</code>
+    
+    <b>Текущие параметры:</b>
+    {}
+  configuring_lib: |
+    <tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Выбери параметр для библиотеки</b> <code>{}</code>
+    
+    <b>Текущие параметры:</b>
+    {}
+  configuring_folder: |
+    <tg-emoji emoji-id=5433653135799228968>📁</tg-emoji> <b>Выбери параметр для папки</b> <code>{}</code>
+    
+    <b>Текущие параметры:</b>
+    {}
+  configuring_option: |
+    <tg-emoji emoji-id=5404397691184643955>✍️</tg-emoji> <b>Управление параметром</b> <code>{}</code> <b>модуля</b> <code>{}</code>
+    <blockquote><tg-emoji emoji-id=5879785854284599288>ℹ️</tg-emoji> <i>{}</i></blockquote>
+        
+    <b>Стандартное:</b>
+    <blockquote><code>{}</code></blockquote>
+    <b>Текущее:</b>
+    <blockquote><code>{}</code></blockquote>
+        
+    {}
+  configuring_option_lib: |
+    <tg-emoji emoji-id=5256094480498436162>📦</tg-emoji> <b>Управление параметром</b> <code>{}</code> <b>библиотеки</b> <code>{}</code>
+    <blockquote><tg-emoji emoji-id=5879785854284599288>ℹ️</tg-emoji> <i>{}</i></blockquote>
+        
+    <b>Стандартное:</b>
+    <blockquote><code>{}</code></blockquote>
+    <b>Текущее:</b>
+    <blockquote><code>{}</code></blockquote>
+        
+    {}
   configuring_category: "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Выбери параметр для модуля</b> <code>{}</code> <b>в категории</b> <code>{}</code>\n<i>ℹ️ {}</i>\n\n<b>Текущие настройки:</b>\n{}"
   configuring_category_lib: "📦 <b>Выбери параметр для библиотеки</b> <code>{}</code> <b>в категории</b> <code>{}</code>\n<i>ℹ️ {}</i>\n\n<b>Текущие настройки:</b>\n{}"
   category_header: "\n<b>📂 {}</b>"
   category_header_doc: "\n<b>📂 {}</b>\n<i>{}</i>"
   category_uncategorized: "\n<b><tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> Прочее</b>"
-  configuring_option: "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Управление параметром</b> <code>{}</code> <b>модуля</b> <code>{}</code>\n<blockquote><tg-emoji emoji-id=5879785854284599288>ℹ️</tg-emoji> <i>{}</i></blockquote>\n\n<b>Стандартное: {}</b>\n\n<b>Текущее: {}</b>\n\n{}"
-  configuring_option_lib: "<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>Управление параметром</b> <code>{}</code> <b>библиотеки</b> <code>{}</code>\n<blockquote><tg-emoji emoji-id=5879785854284599288>ℹ️</tg-emoji> <i>{}</i></blockquote>\n\n<b>Стандартное: {}</b>\n\n<b>Текущее: {}</b>\n\n{}"
   option_saved: "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> сохранен!</b>\n<b>Текущее: {}</b>"
   option_saved_lib: "<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>Параметр</b> <code>{}</code> <b>библиотеки</b> <code>{}</code><b> сохранен!</b>\n<b>Текущее: {}</b>"
-  option_reset: "<tg-emoji emoji-id=5318933532825888187>♻️</tg-emoji> <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> сброшен до значения по умолчанию</b>\n<b>Текущее: {}</b>"
-  option_reset_lib: "<tg-emoji emoji-id=5318933532825888187>♻️</tg-emoji> <b>Параметр</b> <code>{}</code> <b>библиотеки</b> <code>{}</code><b> сброшен до значения по умолчанию</b>\n<b>Текущее: {}</b>"
+  option_reset: |
+    <tg-emoji emoji-id=5318933532825888187>♻️</tg-emoji> <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> сброшен до значения по умолчанию</b>
+
+    <b>Текущее:</b>
+    <blockquote>{}</blockquote>
+  option_reset_lib: |
+    <tg-emoji emoji-id=5318933532825888187>♻️</tg-emoji> <b>Параметр</b> <code>{}</code> <b>библиотеки</b> <code>{}</code><b> сброшен до значения по умолчанию</b>
+    
+    <b>Текущее:</b>
+    <blockquote>{}</blockquote>
   _cls_doc: "Интерактивный конфигуратор Goyroku"
   args: "🚫 <b>Ты указал неверные аргументы</b>"
   no_mod: "🚫 <b>Модуль не существует</b>"
@@ -419,7 +469,8 @@ inline_stuff:
   name: InlineStuff
   _cls_doc: Настройка inline-бота
   _cmd_doc_ch_bot_token: <token> - Изменить токен inline-бота
-test:
+logger:
+  name: "Logger"
   set_loglevel: "<tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>Укажи уровень логов числом или строкой</b>"
   no_logs: "<tg-emoji emoji-id=5355133243773435190>🤷‍♀️</tg-emoji> <b>У тебя нет логов уровня</b> <code>{}</code><b>.</b>"
   configping: "Ваш кастомный текст. Вы можете использовать плейсхолдеры: {ping} - Это ваш пинг, {uptime} - Это ваш аптайм, {ping_hint} - подсказка. Вы можете использовать плейсхолдер {hostname} если вам нужен hostname вашего сервера"
@@ -445,8 +496,15 @@ test:
   cancel: "🚫 Отмена"
   logs_cleared: "🗑 <b>Логи очищены</b>"
   _cmd_doc_clearlogs: "Очистить логи"
+  cfg_force_send_all: |
+    <b>НЕ ТРОГАЙ, ЕСЛИ ТЫ НЕ ЗНАЕШЬ, ЧТО ЭТО ДЕЛАЕТ!</b>
+    По умолчанию, Goyroku попробует определить, какой клиент вызвал логи. Например, модуль TestModule установлен на Client1, а TestModule2 - на Client2. По умолчанию, Client2 будет получать логи от TestModule2, а Client1 - от TestModule. Если эта опция включена, Goyroku будет отправлять все логи на Client1 и Client2, даже если это не тот клиент, который вызвал лог.
+  cfg_tglog_level: |
+    <b>НЕ ТРОГАЙ, ЕСЛИ ТЫ НЕ ЗНАЕШЬ, ЧТО ЭТО ДЕЛАЕТ!</b>
+    Минимальный уровень логирования для записей, которые будут отправлены в Telegram.
+  cfg_ignore_common: "Игнорировать общие ошибки (например, 'TypeError' в telethon)"
+  cfg_disable_internet_warn: "Отключить предупреждение о проблемах с интернет-соединением"
 
-  name: Test
 updater:
   source: "<tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>Исходный код можно прочитать</b> <a href='{}'>здесь</a>"
   restarting_caption: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Твоя {} перезагружается...</b>"
@@ -500,6 +558,7 @@ updater:
     <blockquote>Detections:
     {critical}
     {warns}</blockquote>
+
 heroku_plugin_security:
   name: "HikkaPluginSecurity"
   no_hash: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Нужно указать название модуля</b>"
@@ -555,8 +614,16 @@ help:
   _cmd_doc_helphide: "<модуль или модули> - Спрятать модуль(-и) из помощи\n*Разделяй модули пробелами"
   _cmd_doc_support: "Показать ссылку на чат помощи Goyroku"
   show_preview_in_help: "Показать # meta banner в превью help [module] ?"
-
+  core_emoji_doc: "Эмодзи для встроенных модулей"
+  plain_emoji_doc: "Эмодзи для загруженных модулей"
+  empty_emoji_doc: "Эмодзи для пустых модулей"
+  desc_icon_doc: "Эмодзи для описания"
+  command_emoji_doc: "Эмодзи для команд"
+  banner_url_doc: "Баннер для .help, пример https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_help.png"
+  media_quote_doc: "Показывать ли фотографии в виде цитаты"
+  invert_media_doc: "Показывать ли фотографии в инвертированном виде"
   name: Help
+
 heroku_info:
   info_message: "{}\n<blockquote>┌\n├  【<tg-emoji emoji-id=5883964170268840032>👤</tg-emoji>】 <b>𝙾𝚠𝚗𝚎𝚛</b>: {me}\n├  【<tg-emoji emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>𝚅𝚎𝚛𝚜𝚒𝚘𝚗</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5778335621491723621>📷</tg-emoji>】 <b>𝙿𝚛𝚎𝚏𝚒𝚡</b>: {prefix}⠀ ⠀ \n├  【<tg-emoji emoji-id=5843799474362652262>🔄</tg-emoji>】 <b>𝚄𝚙𝚝𝚒𝚖𝚎</b>: {uptime}\n├  【<tg-emoji emoji-id=5879770735999717115>👤</tg-emoji>】 <b>𝙱𝚛𝚊𝚗𝚌𝚑</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5775887550262546277>❗️</tg-emoji>】 <b>𝙲𝙿𝚄</b>: {cpu_usage}\n├  【<tg-emoji emoji-id=5931409969613116639>🛡</tg-emoji>】 <b>𝚁𝙰𝙼</b>: {ram_usage}\n├  【<tg-emoji emoji-id=5931472654660800739>📊</tg-emoji>】 <b>𝙿𝚒𝚗𝚐</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5926783847453692661>🛡</tg-emoji>】 <b>𝚄𝚙𝚍𝚊𝚝𝚎</b>: {upd}\n├  【<tg-emoji emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>𝙷𝚘𝚜𝚝</b>: {platform}\n├  【<tg-emoji emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>𝙾𝚂</b>: {os}\n├  【<tg-emoji emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>𝙿𝚢𝚝𝚑𝚘𝚗 𝚅𝚎𝚛𝚜𝚒𝚘𝚗</b>: {python_ver}\n└</blockquote>"
   non_detectable: "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Этот компонент невозможно обнаружить на вашем сервере!</b>"
@@ -581,9 +648,13 @@ heroku_info:
   _cmd_doc_ubinfo: "Отправить информацию по типу 'Что такое Хероку?'"
   _cmd_doc_info: "Отправляет информацию о боте"
   _cmd_doc_setinfo: "<текст> - Изменить текст в .info"
-
+  _cfg_quote: "Показывать ли фотографии в виде цитаты"
+  _cfg_invert: "Показывать ли фотографии в инвертированном виде"
   name: GoyrokuInfo
   _cls_doc: Показать информацию о юзерботе
+  no_text: "<tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> <b>Не указан текст</b>"
+  info_set: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Текст Инфо обновлен!</b>"
+
 loader:
   link: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Файл</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}lm в ответ на это сообщение для установки</b>\n\n<tg-emoji emoji-id=4916086774649848789>🔗</tg-emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
   file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Файл</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}lm в ответ на это сообщение для установки</b>\n\n{not_exact}"
@@ -674,7 +745,7 @@ loader:
   not_subscribed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Сначала нужно подписаться на канал модуля</b>
   verify_required: '<tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>Для разблокировки возможности устанавливать модули сторонних разработчиков пройдите тест в <a href="https://t.me/{}?start=lm_verify">вашем боте</a></b>'
   unsafe_module: |
-    <tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> Этот модуль может быть небезопасен, поэтому мы рекомендуем не его устанавливать. Если вы действительно хотите это сделать, добавьте <code>-f</code> к команде.
+    <tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> Этот модуль может быть небезопасен, поэтому мы рекомендуем его не устанавливать. Если вы действительно хотите это сделать, добавьте <code>-f</code> к команде.
 
     <blockquote>Detections:
     {critical}
@@ -768,8 +839,10 @@ translate:
   translated_text: "<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> Переведённый текст:\n<blockquote>{tr_text} </blockquote>"
   _cls_doc: "Переводит текст (очевидно)"
   _cmd_doc_tr: "[язык] [текст] - Перевести текст"
-
+  only_text: "Только переведенный текст в .tr"
+  provider: "Провайдер перевода для использования"
   name: Translator
+
 quickstart:
   base: "<tg-emoji emoji-id=5463379725441341739>🪐</tg-emoji> <b>Привет.</b> Твой юзербот <b>{}</b> теперь установлен.\n\n<tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>Нужна помощь?</b> Заходи в <a href=\"https://t.me/heroku_talks\">наш чат поддержки</a>. Мы помогаем <b>всем</b>.\n\n<tg-emoji emoji-id=4940480187436369099>💁‍♀️</tg-emoji> <b>Краткое руководство:</b>\n\n<tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> <b>Напиши</b> <code>.help</code><b>, чтобы увидеть список модулей</b>\n<tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> <b>Напиши</b> <code>.help &lt;Имя модуля/команда&gt;</code><b>, чтобы увидеть описание модуля</b>\n<tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> <b>Напиши</b> <code>.dlmod &lt;ссылка&gt;</code><b>, чтобы загрузить модуль по ссылке</b>\n<tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> <b>Напиши</b> <code>.loadmod</code> <b>в ответ на файл, чтобы загрузить из него модуль</b>\n<tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> <b>Напиши</b> <code>.unloadmod &lt;Имя модуля&gt;</code><b>, чтобы выгрузить модуль</b>\n\n<tg-emoji emoji-id=5456178297941561360>💡</tg-emoji> <b>Goyroku поддерживает модули от Hikka, Friendly-Telegram и GeekTG, а также свои собственные.</b>\n"
   language_saved: "🇷🇺 Язык сохранен!"
@@ -832,3 +905,17 @@ $inline:
   button403: "Вы не можете нажать на эту кнопку!"
   keep_id: "⚠️ Не удаляйте ID! {}"
   no_query_results: "<tg-emoji emoji-id=5440660757194744323>‼️</tg-emoji> <b>Не удалось создать форму</b>\n\nВозможные способы исправления ошибки:\n\n1. Перезагрузите Goyroku: <code>{prefix}restart</code>\n\n2. Включите inline-режим для бота: перейдите в @BotFather, отправьте /mybots, нажмите Bot Settings -> Inline Mode -> On\n\n3. Создайте нового бота: отправьте команду <code>{prefix}ch_heroku_bot</code> <@имя_бота>"
+
+goyroku_ping:
+  configping: "Кастомный текст. Вы можете использовать плейсхолдеры: {ping} - это ваш пинг, {uptime} - это ваш время работы, {ping_hint} - подсказка. Вы можете использовать плейсхолдер {hostname}, если вам нужен имя хоста."
+  configpingph: "🤖 Кастомные плейсхолдеры: {}"
+  hint: "Укажите подсказки. Чтобы добавить их в текст, добавьте плейсхолдер {hint} в custom_message"
+  ping_emoji: "Эмодзи, которое появляется при небольшом увеличении пинга.."
+  banner_url: "Вот картинка вашего пинга, например: https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_ping.png"
+  always_show_hint: "Показывать ли подсказку в пинге всегда"
+  quote_media: "Показывать ли фотографии в виде цитаты"
+  invert_media: "Показывать ли фотографии в инвертированном виде"
+  suspend_invalid_time: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Некорректное время заморозки</b>"
+  suspended: "<tg-emoji emoji-id=5452023368054216810>🥶</tg-emoji> <b>Бот заморожен на <code>{}</code> <b>секунд</b>"
+  no_text: "<tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> <b>Не указан текст</b>"
+  ping_set: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Текст пинга обновлен!</b>"

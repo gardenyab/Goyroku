@@ -431,7 +431,7 @@ inline_stuff:
   _cls_doc: "インライン機能のサポートを提供します"
 
   _cmd_doc_ch_bot_token: <token> - インラインボットのトークンを変更
-test:
+logger:
   name: "Tester"
   set_loglevel: "<tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>詳細レベルを整数または文字列で指定してください</b>"
   no_logs: "<tg-emoji emoji-id=5355133243773435190>🤷‍♀️</tg-emoji> <b>詳細レベル</b> <code>{}</code> <b>のログはありません。</b>"

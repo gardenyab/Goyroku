@@ -14,6 +14,7 @@ import time
 import psutil
 import logging
 import herokutl
+import typing
 
 from herokutl.errors import WebpageMediaEmptyError
 from herokutl.types import InputMediaWebPage
@@ -30,7 +31,9 @@ logger = logging.getLogger(__name__)
 class HerokuInfoMod(loader.Module):
     """Show userbot info"""
 
-    strings = {"name": "HerokuInfo"}
+    strings = {
+        "name": "HerokuInfo",
+    }
 
     def __init__(self):
         self.config = loader.ModuleConfig(
@@ -71,13 +74,13 @@ class HerokuInfoMod(loader.Module):
             loader.ConfigValue(
                 "quote_media",
                 False,
-                "Switch preview media to quote",
+                lambda: self.strings["_cfg_quote"],
                 validator=loader.validators.Boolean(),
             ),
             loader.ConfigValue(
                 "invert_media",
                 False,
-                "Switch preview invert media",
+                lambda: self.strings["_cfg_invert"],
                 validator=loader.validators.Boolean(),
             ),
         )
@@ -90,6 +93,26 @@ class HerokuInfoMod(loader.Module):
                         return line.split("=")[1].strip().strip('"')
         except FileNotFoundError:
             return self.strings["non_detectable"]
+
+    @staticmethod
+    def _get_config_obj_type(instance: typing.Any) -> bool | str:
+        if isinstance(instance, loader.Library):
+            return "library"
+        return instance.__origin__.startswith("<core")
+
+    def _resolve_configurable(
+            self,
+            query: str,
+        ) -> tuple[str | None, typing.Any, bool | str | None]:
+            if (instance := self.lookup(query)) and hasattr(instance, "config"):
+                return query, instance, self._get_config_obj_type(instance)
+    
+            fuzzy_name, _ = self._fuzzy_lookup_configurable(query)
+            if fuzzy_name and (instance := self.lookup(fuzzy_name)):
+                if hasattr(instance, "config") and instance.config:
+                    return fuzzy_name, instance, self._get_config_obj_type(instance)
+    
+            return None, None, None
 
     async def _render_info(self, start: float) -> str:
         try:
@@ -238,3 +261,13 @@ class HerokuInfoMod(loader.Module):
     @loader.command()
     async def ubinfo(self, message: Message):
         await utils.answer(message, self.strings["desc"])
+
+    @loader.command()
+    async def setinfo(self, message: Message):
+        text = utils.get_args_raw(message)
+        if not text:
+            await utils.answer(message, self.strings["no_text"])
+            return
+        mod_name, instance, obj_type = self._resolve_configurable(self.strings["name"])
+        instance.config["custom_message"] = text
+        await utils.answer(message, self.strings["info_set"])

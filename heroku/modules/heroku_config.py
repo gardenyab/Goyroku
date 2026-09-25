@@ -65,7 +65,8 @@ class HerokuConfigMod(loader.Module):
     """Interactive configurator for Heroku Userbot"""
 
     strings = {
-        "Name": "HerokuConfig",
+        "name": "HerokuConfig",
+        "displayName": "Config",
         "choose_core": "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose a category</b>",
         "configure": "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose a module to configure</b>",
         "configure_lib": "📦 <b>Choose a library to configure</b>",
@@ -1414,7 +1415,9 @@ Error: {}</b>""",
             if not hasattr(mod, "config") or not mod.config:
                 continue
             mod_name = (
-                mod.strings("name") if callable(mod.strings) else mod.__class__.__name__
+                mod.strings("name")
+                if callable(mod.strings)
+                else mod.__class__.__name__
             )
             module_folders = set()
             for param in mod.config:

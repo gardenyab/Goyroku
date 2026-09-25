@@ -58,7 +58,7 @@ class HerokuBackupMod(loader.Module):
                     + [
                         [
                             {
-                                "text": "🚫 Never",
+                                "text": self.strings["never_button"],
                                 "callback": self._set_backup_period,
                                 "args": (0,),
                             }
@@ -181,7 +181,7 @@ class HerokuBackupMod(loader.Module):
                     [
                         [
                             {
-                                "text": "↪️ Restore this",
+                                "text": self.strings["restore_this_button"],
                                 "data": "heroku/backupall/restore/confirm",
                             }
                         ]
@@ -205,9 +205,9 @@ class HerokuBackupMod(loader.Module):
         if call.data == "heroku/backupall/restore/confirm":
             await utils.answer(
                 call,
-                "❓ <b>Are you sure?</b>",
+                self.strings["are_you_sure"],
                 reply_markup={
-                    "text": "✅ Yes",
+                    "text": self.strings["yes_restore"],
                     "data": "heroku/backupall/restore",
                 },
             )
@@ -541,7 +541,7 @@ class HerokuBackupMod(loader.Module):
                 [
                     [
                         {
-                            "text": "↪️ Restore this",
+                            "text": self.strings["restore_this_button"],
                             "data": "heroku/backupall/restore/confirm",
                         },
                     ],

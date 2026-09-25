@@ -36,44 +36,44 @@ class Help(loader.Module):
             loader.ConfigValue(
                 "core_emoji",
                 "<tg-emoji emoji-id=4974681956907221809>▪️</tg-emoji>",
-                lambda: "Core module bullet",
+                lambda: self.strings["core_emoji_doc"],
             ),
             loader.ConfigValue(
                 "plain_emoji",
                 "<tg-emoji emoji-id=4974508259839836856>▪️</tg-emoji>",
-                lambda: "Plain module bullet",
+                lambda: self.strings["plain_emoji_doc"],
             ),
             loader.ConfigValue(
                 "empty_emoji",
                 "<tg-emoji emoji-id=5100652175172830068>🟠</tg-emoji>",
-                lambda: "Empty modules bullet",
+                lambda: self.strings["empty_emoji_doc"],
             ),
             loader.ConfigValue(
                 "desc_icon",
                 "<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji>",
-                lambda: "Desc emoji",
+                lambda: self.strings["desc_icon_doc"],
             ),
             loader.ConfigValue(
                 "command_emoji",
                 "<tg-emoji emoji-id=5197195523794157505>▫️</tg-emoji>",
-                lambda: "Emoji for command",
+                lambda: self.strings["command_emoji_doc"],
             ),
             loader.ConfigValue(
                 "banner_url",
                 None,
-                lambda: "Banner for .help, example https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_help.png",
+                lambda: self.strings["banner_url_doc"],
                 validator=loader.validators.RandomLink(),
             ),
             loader.ConfigValue(
                 "media_quote",
                 "False",
-                lambda: "quote a banner in help",
+                lambda: self.strings["media_quote_doc"],
                 validator=loader.validators.Boolean(),
             ),
             loader.ConfigValue(
                 "invert_media",
                 "False",
-                lambda: "invert banner",
+                lambda: self.strings["invert_media_doc"],
                 validator=loader.validators.Boolean(),
             ),
             loader.ConfigValue(

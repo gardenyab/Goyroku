@@ -431,7 +431,7 @@ inline_stuff:
   _cls_doc: "Pr0v1d35 supp0r7 4 1nl1n3 57uff"
 
   _cmd_doc_ch_bot_token: <70k3n> - Ch4ng3 1nl1n3 b07 70k3n
-test:
+logger:
   name: "T3573r"
   set_loglevel: "<tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>Plz sp3c1fy v3rb0517y 45 4n 1n73g3r 0r 57r1ng</b>"
   no_logs: "<tg-emoji emoji-id=5355133243773435190>🤷‍♀️</tg-emoji> <b>U d0n'7 h4v3 4ny l0g5 47 v3rb0517y</b> <code>{}</code><b>.</b>"

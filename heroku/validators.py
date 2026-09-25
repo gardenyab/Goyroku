@@ -859,8 +859,8 @@ class RandomLink(Series):
         super().__init__(validator=Link(), min_len=1)
         self.internal_id = "Series"
         self.doc = {
-            "en": "A list of links, one of which will be chosen randomly",
-            "ru": "Список ссылок, одна из которых будет выбрана случайным образом",
+            "en": "а list of links, one of which will be chosen randomly",
+            "ru": "списком ссылок, одна из которых будет выбрана случайным образом",
         }
 
     @staticmethod
@@ -893,8 +893,8 @@ class RandomString(Series):
         super().__init__(validator=String(), min_len=1)
         self.internal_id = "Series"
         self.doc = {
-            "en": "A list of strings, one of which will be chosen randomly",
-            "ru": "Список строк, одна из которых будет выбрана случайным образом",
+            "en": "а list of strings, one of which will be chosen randomly",
+            "ru": "списком строк, одна из которых будет выбрана случайным образом",
         }
 
     @staticmethod

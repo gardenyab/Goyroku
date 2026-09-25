@@ -34,13 +34,13 @@ class Translator(loader.Module):
             loader.ConfigValue(
                 "only_text",
                 False,
-                "only translated text in .tr",
+                lambda: self.strings["only_text"],
                 validator=loader.validators.Boolean(),
             ),
             loader.ConfigValue(
                 "provider",
                 "telegram",
-                "Translation provider to use",
+                lambda: self.strings["provider"],
                 validator=loader.validators.Choice(["telegram", "google"]),
             ),
         )

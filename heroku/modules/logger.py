@@ -37,11 +37,11 @@ for mod in os.scandir(DEBUG_MODS_DIR):
 
 
 @loader.tds
-class TestMod(loader.Module):
+class LoggerMod(loader.Module):
     """Perform operations based on userbot self-testing"""
 
     strings = {
-        "name": "Tester",
+        "name": "Logger"
     }
 
     def __init__(self):
@@ -50,25 +50,14 @@ class TestMod(loader.Module):
             loader.ConfigValue(
                 "force_send_all",
                 False,
-                (
-                    "⚠️ Do not touch, if you don't know what it does!\nBy default, "
-                    " Heroku will try to determine, which client caused logs. E.g. there"
-                    " is a module TestModule installed on Client1 and TestModule2 on"
-                    " Client2. By default, Client2 will get logs from TestModule2, and"
-                    " Client1 will get logs from TestModule. If this option is enabled,"
-                    " Heroku will send all logs to Client1 and Client2, even if it is"
-                    " not the one that caused the log."
-                ),
+                lambda: self.strings["cfg_force_send_all"],
                 validator=loader.validators.Boolean(),
                 on_change=self._pass_config_to_logger,
             ),
             loader.ConfigValue(
                 "tglog_level",
                 "ERROR",
-                (
-                    "⚠️ Do not touch, if you don't know what it does!\n"
-                    "Minimal loglevel for records to be sent in Telegram."
-                ),
+                lambda: self.strings["cfg_tglog_level"],
                 validator=loader.validators.Choice(
                     ["ALL", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "DISABLE"]
                 ),
@@ -77,14 +66,14 @@ class TestMod(loader.Module):
             loader.ConfigValue(
                 "ignore_common",
                 True,
-                "Ignore common errors (e.g. 'TypeError' in telethon)",
+                lambda: self.strings["cfg_ignore_common"],
                 validator=loader.validators.Boolean(),
                 on_change=self._pass_config_to_logger,
             ),
             loader.ConfigValue(
                 "disable_internet_warn",
                 False,
-                "Ignore all internet errors",
+                lambda: self.strings["cfg_disable_internet_warn"],
                 validator=loader.validators.Boolean(),
             )
         )

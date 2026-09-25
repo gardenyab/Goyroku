@@ -17,13 +17,11 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import getpass
-import inspect
 import logging
-import os
 import platform as lib_platform
 import random
 import time
-from io import BytesIO
+import typing
 
 from herokutl.tl.types import Message
 from herokutl.types import InputMediaWebPage
@@ -39,30 +37,6 @@ class Ping(loader.Module):
 
     strings = {
         "name": "Ping",
-        "configping": "Your custom text. You can use placeholders: {ping} - This is your ping, {uptime} - This is your uptime, {ping_hint} - hint. You can use the placeholder {hostname} if you need a hostname.",
-        "configpingph": "🤖 Custom placeholders: {}",
-        "hint": "Specify hints. To add them to the text, add the {hint} placeholder to custom_message",
-        "ping_emoji": "An emoji that appears when the ping increases slightly..",
-        "banner_url": "Here's a picture of your ping, for example: https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_ping.png",
-        "always_show_hint": "Whether to always show the Hint",
-        "quote_media": "Whether to show photos as quotes,",
-        "invert_media": "Change the photo position (top or bottom)",
-        "suspend_invalid_time": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Incorrect freezing time</b>",
-        "suspended": "<tg-emoji emoji-id=5452023368054216810>🥶</tg-emoji> <b>Bot frozen for <code>{}</code> <b>seconds</b>"
-    }
-
-    strings_ru = {
-        "name": "Ping",
-        "configping": "Ваш кастомный текст. Вы можете использовать плейсхолдеры: {ping} - Это ваш пинг, {uptime} - Это ваш аптайм, {ping_hint} - подсказка. Вы можете использовать плейсхолдер {hostname} если вам нужен hostname вашего сервера",
-        "configpingph": "🤖Кастомные плейсхолдеры: {}",
-        "hint": "Укажите Подсказки. Для добавления их в текст, добавье в custom_message плейсхолдер {hint}",
-        "ping_emoji": "Эмодзи которое появляется при не значительном росте пинга.",
-        "banner_url": "Картинка для вашего пинга, для примера: https://raw.githubusercontent.com/gardenyab/Goyroku/refs/heads/master/assets/goyroku_ping.png",
-        "always_show_hint": "Показывать ли Подсказку всегда",
-        "quote_media": "Показывать ли фото как цитату",
-        "invert_media": "Поменять местоположение фото (сверху или снизу)",
-        "suspend_invalid_time": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Неверное время заморозки</b>",
-        "suspended": "<tg-emoji emoji-id=5452023368054216810>🥶</tg-emoji> <b>Бот заморожен на</b> <code>{}</code> <b>секунд</b>"
     }
     
     def __init__(self):
@@ -113,17 +87,38 @@ class Ping(loader.Module):
             loader.ConfigValue(
                 "quote_media",
                 False,
-                lambda: self.strings["quote_media"], #"Switch preview media to quote in ping",
+                lambda: self.strings["quote_media"],
                 validator=loader.validators.Boolean(),
             ),
             loader.ConfigValue(
                 "invert_media",
                 False,
-                lambda: self.strings["invert_media"], #"Switch preview invert media in ping",
+                lambda: self.strings["invert_media"],
                 validator=loader.validators.Boolean(),
             ),
         )
+    
+    @staticmethod
+    def _get_config_obj_type(instance: typing.Any) -> bool | str:
+        if isinstance(instance, loader.Library):
+            return "library"
+        return instance.__origin__.startswith("<core")
+    
+    def _resolve_configurable(
+            self,
+            query: str,
+        ) -> tuple[str | None, typing.Any, bool | str | None]:
+            if (instance := self.lookup(query)) and hasattr(instance, "config"):
+                return query, instance, self._get_config_obj_type(instance)
         
+            fuzzy_name, _ = self._fuzzy_lookup_configurable(query)
+            if fuzzy_name and (instance := self.lookup(fuzzy_name)):
+                if hasattr(instance, "config") and instance.config:
+                    return fuzzy_name, instance, self._get_config_obj_type(instance)
+        
+            return None, None, None
+    
+    
     @loader.command()
     async def suspend(self, message: Message):
         try:
@@ -176,6 +171,16 @@ class Ping(loader.Module):
             file=banner,
             invert_media=self.config["invert_media"],
         )
+
+    @loader.command()
+    async def setping(self, message: Message):
+        text = utils.get_args_raw(message)
+        if not text:
+            await utils.answer(message, self.strings["no_text"])
+            return
+        mod_name, instance, obj_type = self._resolve_configurable(self.strings["name"])
+        instance.config["custom_message"] = text
+        await utils.answer(message, self.strings["ping_set"])
 
     async def client_ready(self):
         self._content_channel_id = await utils.wait_for_content_channel(self._db)
