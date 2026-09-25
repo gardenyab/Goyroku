@@ -873,3 +873,37 @@ class RandomLink(Series):
 
         clean_list = Series._validate(value, **val_args)
         return RandomLinkList(clean_list)
+
+class RandomStringList(list):
+    def __str__(self):
+        import random
+
+        if not self:
+            return ""
+        return str(random.choice(self))
+
+    def __bytes__(self):
+        return str(self).encode("utf-8")
+
+    def __repr__(self):
+        return super().__repr__()
+
+class RandomString(Series):
+    def __init__(self):
+        super().__init__(validator=String(), min_len=1)
+        self.internal_id = "Series"
+        self.doc = {
+            "en": "A list of strings, one of which will be chosen randomly",
+            "ru": "Список строк, одна из которых будет выбрана случайным образом",
+        }
+
+    @staticmethod
+    def _validate(value: ConfigAllowedTypes, /, **kwargs) -> RandomStringList:
+        val_args = kwargs.copy()
+        if "validator" not in val_args:
+            val_args["validator"] = String()
+        if "min_len" not in val_args:
+            val_args["min_len"] = 1
+
+        clean_list = Series._validate(value, **val_args)
+        return RandomStringList(clean_list)
