@@ -232,7 +232,7 @@ class UpdaterMod(loader.Module):
             except Exception:
                 pass
 
-    @loader.loop(interval=60, autostart=True)
+    @loader.loop(interval=5, autostart=True)
     async def poller(self):
         if NO_GIT:
             return
