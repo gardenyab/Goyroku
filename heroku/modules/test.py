@@ -86,53 +86,7 @@ class TestMod(loader.Module):
                 False,
                 "Ignore all internet errors",
                 validator=loader.validators.Boolean(),
-            ),
-            loader.ConfigValue(
-                "custom_message",
-                "<tg-emoji emoji-id=5920515922505765329>⚡️</tg-emoji> <b>𝙿𝚒𝚗𝚐: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n<tg-emoji emoji-id=5900104897885376843>🕓</tg-emoji><b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>{uptime}</code>",
-                lambda: (
-                    self.strings["configping"]
-                    + (
-                        "\n"
-                        + self.strings["configpingph"].format(
-                            "\n" + utils.config_placeholders()
-                        )
-                        if utils.config_placeholders()
-                        else ""
-                    )
-                ),
-                validator=loader.validators.String(),
-            ),
-            loader.ConfigValue(
-                "hint",
-                None,
-                lambda: self.strings["hint"],
-                validator=loader.validators.String(),
-            ),
-            loader.ConfigValue(
-                "ping_emoji",
-                "🪐",
-                lambda: self.strings["ping_emoji"],
-                validator=loader.validators.String(),
-            ),
-            loader.ConfigValue(
-                "banner_url",
-                None,
-                lambda: self.strings["banner_url"],
-                validator=loader.validators.RandomLink(),
-            ),
-            loader.ConfigValue(
-                "quote_media",
-                False,
-                "Switch preview media to quote in ping",
-                validator=loader.validators.Boolean(),
-            ),
-            loader.ConfigValue(
-                "invert_media",
-                False,
-                "Switch preview invert media in ping",
-                validator=loader.validators.Boolean(),
-            ),
+            )
         )
 
     def _pass_config_to_logger(self):
@@ -314,57 +268,6 @@ class TestMod(loader.Module):
                 caption=caption,
                 reply_to=message.form["top_msg_id"],
             )
-
-    @loader.command()
-    async def suspend(self, message: Message):
-        try:
-            time_sleep = float(utils.get_args_raw(message))
-            if time_sleep > 86400 * 365 * 100:
-                await utils.answer(message, self.strings["suspend_invalid_time"])
-            else:
-                await utils.answer(
-                    message,
-                    self.strings["suspended"].format(time_sleep),
-                )
-                time.sleep(time_sleep)
-        except ValueError:
-            await utils.answer(message, self.strings["suspend_invalid_time"])
-
-    @loader.command()
-    async def ping(self, message: Message):
-        """- Find out your userbot ping"""
-        start = time.perf_counter_ns()
-        message = await utils.answer(message, self.config["ping_emoji"])
-        banner = str(self.config["banner_url"])
-
-        if self.config["banner_url"] and self.config["quote_media"] is True:
-            banner = InputMediaWebPage(str(self.config["banner_url"]), optional=True)
-
-        elif not self.config["banner_url"]:
-            banner = None
-
-        data = {
-            "ping": round((time.perf_counter_ns() - start) / 10**6, 3),
-            "uptime": utils.formatted_uptime(),
-            "ping_hint": (
-                (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
-            ),
-            "hostname": lib_platform.node(),
-            "user": getpass.getuser(),
-            "platform": utils.get_platform_name(),
-        }
-        data = await utils.get_placeholders(data, self.config["custom_message"])
-        try:
-            placeholders_msg = self.config["custom_message"].format(**data)
-        except KeyError:
-            logger.exception("Missing placeholder in custom_message")
-            placeholders_msg = "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji>"
-        await utils.answer(
-            message,
-            placeholders_msg,
-            file=banner,
-            invert_media=self.config["invert_media"],
-        )
 
     async def client_ready(self):
         self._content_channel_id = await utils.wait_for_content_channel(self._db)
