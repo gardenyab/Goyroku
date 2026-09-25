@@ -352,7 +352,7 @@ class UpdaterMod(loader.Module):
                             )
                             return
             
-                await self.invoke("update", "-f", peer=self.inline.bot_username)
+                await self.invoke("update", "-f -s", peer=self.inline.bot_username)
 
     async def _delete_all_upd_messages(self):
         for client in self.allclients:
