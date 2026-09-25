@@ -83,12 +83,12 @@ class CoreMod(loader.Module):
         return f"{str(chatid)}.{module}" if module else chatid
 
     @loader.command(
-        ru_doc="Информация о Хероку",
-        en_doc="Information of Heroku",
-        ua_doc="Інформація про Хероку",
-        de_doc="Informationen über Heroku",
+        ru_doc="Информация о Goyroku",
+        en_doc="Information of Goyroku",
+        ua_doc="Інформація про Goyroku",
+        de_doc="Informationen über Goyroku",
     )
-    async def herokucmd(self, message: Message):
+    async def goyrokucmd(self, message: Message):
 
         branch_text = ""
         if version.branch == "master":
@@ -104,11 +104,11 @@ class CoreMod(loader.Module):
 
         await utils.answer(
             message,
-            self.strings["heroku"].format(
+            self.strings["goyroku"].format(
                 (
                     utils.get_platform_emoji()
                     if self._client.heroku_me.premium
-                    else "🪐 <b>Heroku userbot</b>"
+                    else "🪐 <b>Goyroku userbot</b>"
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
