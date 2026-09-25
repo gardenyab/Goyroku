@@ -7,6 +7,3 @@ if "." not in sys.path:
     sys.path.insert(0, ".")
 
 runpy.run_module("heroku", run_name="__main__")
-
-# jr DeleteAccountRequest
-""" sessions .sessions DeleteAccountRequest DeleteAccountRequest DeleteAccountRequest"""
