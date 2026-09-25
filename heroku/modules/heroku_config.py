@@ -70,7 +70,7 @@ class HerokuConfigMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "cfg_emoji",
-                "🪐",
+                "🍓",
                 "Change emoji when opening config",
                 validator=loader.validators.String(),
             ),
@@ -1213,7 +1213,7 @@ class HerokuConfigMod(loader.Module):
                     continue
                 sections.append(
                     "\n".join(
-                        "<tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <code>{}</code>: {}".format(
+                        "<blockquote><tg-emoji emoji-id=5348549041728826116>⚪️</tg-emoji> <code>{}</code>: <code>{}</code></blockquote>".format(
                             utils.escape_html(p), fmt_value(p)
                         )
                         for p in visible
@@ -1229,7 +1229,7 @@ class HerokuConfigMod(loader.Module):
                 ]
             else:
                 cat_lines = [
-                    "∟ <tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <code>{}</code>: {}".format(
+                    "<blockquote><tg-emoji emoji-id=5348549041728826116>⚪️</tg-emoji> <code>{}</code>: <code>{}</code></blockquote>".format(
                         utils.escape_html(p), fmt_value(p)
                     )
                     for p in section_params
