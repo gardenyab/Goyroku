@@ -80,6 +80,18 @@ class UpdaterMod(loader.Module):
                 doc=lambda: self.strings["_cfg_doc_autoupdate"],
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "autoupdate_security_checks",
+                True,
+                doc=lambda: self.strings["_cfg_doc_autoupdate_security_checks"],
+                validator=loader.validators.Boolean(),
+            ),
+            loader.ConfigValue(
+                "update_security_checks",
+                True,
+                doc=lambda: self.strings["_cfg_doc_update_security_checks"],
+                validator=loader.validators.Boolean(),
+            )
         )
 
     async def _set_autoupdate_state(self, call: BotInlineCall, state: bool):
@@ -304,6 +316,41 @@ class UpdaterMod(loader.Module):
                         ),
                     ),
                 )
+                if self.config["autoupdate_security_checks"]:
+                    diff = utils.get_added_lines_by_file(as_string=True)
+                    if diff:
+                        results = await utils.check_m(diff)
+                        if results["unsafe"] or results["unsafe_warn"]:
+                            await self.inline.bot.send_message(
+                                chat_id=self.tg_id,
+                                text=self.strings["unsafe_autoupdate"].format(
+                                    prefix=self.get_prefix(),
+                                    critical="\n".join(
+                                        [
+                                            f"<code>{cmd}</code> - <b>{perm}</b>"
+                                            for cmd, perm in results["critical"].items()
+                                        ]
+                                    )
+                                    or "",
+                                    warns="\n".join(
+                                        [
+                                            f"<code>{cmd}</code> - <b>{perm}</b>"
+                                            for cmd, perm in results["warn"].items()
+                                        ]
+                                    )
+                                    or "",
+                                ),
+                                reply_markup=self.inline.generate_markup(
+                                    [
+                                        {
+                                            "text": self.strings["force_update"],
+                                            "data": "heroku/update",
+                                            "style": "danger",
+                                        }
+                                    ]
+                                )
+                            )
+                            return
                 await self.invoke("update", "-f", "-s", peer=self.inline.bot_username)
 
     async def _delete_all_upd_messages(self):

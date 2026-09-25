@@ -605,6 +605,13 @@ updater:
     <blockquote>Detections:
     {critical}
     {warns}</blockquote>
+  unsafe_autoupdate: |
+    <tg-emoji emoji-id=5350626912546865231>‼️</tg-emoji> This update contains unsafe changes and we recommend not installing it. If you really want to do so, run `<code>{prefix}update -f</code>` or press button below.
+
+    <blockquote>Detections:
+    {critical}
+    {warns}</blockquote>
+  force_update: "🔄 Force update"
 api_protection:
   name: "APILimiter"
   warning: "⚠️ <b>WARNING!</b>\n\nYour account exceeded the limit of requests, specified in config. In order to prevent Telegram API Flood, userbot has been <b>fully frozen</b> for {} seconds. Further info is provided in attached file. \n\nIt is recommended to get help in <code>{prefix}support</code> group!\n\nIf you think, that it is an intended behavior, then wait until userbot gets unlocked and next time, when you will be going to perform such an operation, use <code>{prefix}suspend_api_protect</code> &lt;time in seconds&gt;"
